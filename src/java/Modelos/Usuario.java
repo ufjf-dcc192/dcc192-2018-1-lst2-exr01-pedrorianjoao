@@ -11,10 +11,10 @@ public class Usuario {
     private String nomeUsuario;
     private ArrayList<Map<Integer, Figurinha>> mapaQtdFig = new ArrayList<>();
 
-    public Usuario(int idUsuario, String nomeUsuario, ArrayList<Figurinha> lstFigurinhas) {
+    public Usuario(int idUsuario, String nomeUsuario, ArrayList<Map<Integer, Figurinha>> mapaQtdFig) {
         this.idUsuario = idUsuario;
         this.nomeUsuario = nomeUsuario;
-
+        this.mapaQtdFig = mapaQtdFig;
     }
 
     //mapaNomes.put(1, "João Delfino");
