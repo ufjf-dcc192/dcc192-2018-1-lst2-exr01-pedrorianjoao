@@ -27,7 +27,7 @@
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="3"><a href="nova.html">Nova Tarefa</a></td>
+                    <td colspan="3"><a href="usuario-inserir.html">Inserir Usuário</a></td>
                 </tr>
             </tfoot>
         </table>
