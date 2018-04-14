@@ -1,6 +1,7 @@
 <%@page import="Modelos.Usuario"%>
 <%@page import="Modelos.Figurinha"%>
 <%@page import="Modelos.ListaDeFigurinhas"%>
+<%@page import="Modelos.ListaDeUsuario"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -12,8 +13,8 @@
         <h1>Lista de Usuários </h1>
         <table border = '1'>
             <tbody>
-                <%for (int i=0; i<ListaDeUsuarios.getUsuarios().size();i++) {
-                Usuario usuario = ListaDeUsuarios.getUsuarios().get(i);
+                <%for (int i=0; i<ListaDeUsuario.getUsuarios().size();i++) {
+                Usuario usuario = ListaDeUsuario.getUsuarios().get(i);
                 %>
                 <tr>
                     <td><a href="usuario-editar.html?linha=<%=i%>">Editar</a></td>
