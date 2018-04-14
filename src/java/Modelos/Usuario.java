@@ -2,17 +2,17 @@ package Modelos;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Map;
 
 
 public class Usuario {
 
-    private static int usuarios = 0;
     private int idUsuario;
     private String nomeUsuario;
-    private ArrayList<FigurasDoAlbum> mapaQtdFig = new ArrayList<>();
+    private ArrayList<Map<Integer, Figurinha>> mapaQtdFig = new ArrayList<>();
 
-    public Usuario(String nomeUsuario, ArrayList<FigurasDoAlbum> mapaQtdFig) {
-        this.idUsuario = usuarios++;
+    public Usuario(int idUsuario, String nomeUsuario, ArrayList<Map<Integer, Figurinha>> mapaQtdFig) {
+        this.idUsuario = idUsuario;
         this.nomeUsuario = nomeUsuario;
         this.mapaQtdFig = mapaQtdFig;
     }
@@ -34,11 +34,11 @@ public class Usuario {
         this.nomeUsuario = nomeUsuario;
     }
 
-    public ArrayList<FigurasDoAlbum> getMapaQtdFig() {
+    public ArrayList<Map<Integer, Figurinha>> getMapaQtdFig() {
         return mapaQtdFig;
     }
 
-    public void setMapaQtdFig(ArrayList<FigurasDoAlbum> mapaQtdFig) {
+    public void setMapaQtdFig(ArrayList<Map<Integer, Figurinha>> mapaQtdFig) {
         this.mapaQtdFig = mapaQtdFig;
     }
 }

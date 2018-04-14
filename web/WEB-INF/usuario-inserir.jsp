@@ -19,28 +19,17 @@
         <h1>Usuário</h1>
         <div> Digite os dados correspondentes :  </div>
         <form method ="post">
-            <label> Nome do Usuário:  <input name = "nome" required="true"/></label>
+            <label> Nome do Usuário:  <input name = "nome"/></label>
 
-            <h1>Lista de Figurinhas:</h1>
-            <table border = '1'>
-                <thead>
-                <th>Nome da Figurinha</th>
-                <th>Quantidade Disponível</th>
-                </thead>
-                <tbody>
-                    <% List<Figurinha> figurinha = ListaDeFigurinhas.getFigurinhas();
-                        for (int i = 0; i < figurinha.size(); i++) {
+            <label> Lista de Figurinhas: <input name = "lstFigurinhas"/></label>
+                <% List<Figurinha> figurinha = ListaDeFigurinhas.getFigurinhas();
+                    for (int i = 0; i < figurinha.size(); i++) {
 
-                    %>
-                    <tr>
-                        <td><%=figurinha.get(i).getDescricao()%></td> 
-                        <td><input required="true" type="number" name = <%=figurinha.get(i).getNumero()%> /></td>
-                            <%
-                                }
-                            %>
-                    </tr>
-                </tbody>
-            </table>
+                %>
+            <label><%=figurinha.get(i).getDescricao()%> <input name = <%=figurinha.get(i).getNumero()%> /></label><%
+            }
+%>
+         
             <input type = "submit">
             <input type = "reset">
 
