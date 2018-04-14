@@ -4,10 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-/**
- *
- * @author Rian das Dores Alves 201676040
- */
+
 public class Usuario {
 
     private int idUsuario;
