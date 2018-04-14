@@ -1,14 +1,21 @@
 package Servlets;
 
+import Modelos.Figurinha;
+import Modelos.ListaDeFigurinhas;
+import Modelos.ListaDeUsuario;
+import Modelos.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "UsuarioServlet", urlPatterns = {"/usuario-listar.html", "/usuario-novo.html","/usuario-editar.html","/usuario-excluir.html"})
+@WebServlet(name = "UsuarioServlet", urlPatterns = {"/usuario-listar.html", "/usuario-inserir.html", "/usuario-editar.html", "/usuario-excluir.html"})
 public class UsuarioServlet extends HttpServlet {
 
     @Override
@@ -23,28 +30,48 @@ public class UsuarioServlet extends HttpServlet {
         } else if ("/usuario-excluir.html".equals(request.getServletPath())) {
             excluiUsuario(request, response);
         }
+        response.sendError(404);
 
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        if (request.getParameter("operacao") == null) {
+            response.setContentType("text/html;charset=UTF-8");
+            String nome = request.getParameter("nome");
+            ArrayList<Map<Integer, Figurinha>> mapaQtdFig = new ArrayList<>();
+            Map<Integer, Figurinha> mapa = new HashMap<>();
+
+            ArrayList<Figurinha> figurinhas = (ArrayList<Figurinha>) ListaDeFigurinhas.getFigurinhas();
+            for (int i = 0; i < figurinhas.size(); i++) {
+                if (request.getParameter(Integer.toString(figurinhas.get(i).getNumero())) != null) {
+                    mapa.put(Integer.parseInt(request.getParameter(Integer.toString(figurinhas.get(i).getNumero()))), figurinhas.get(i));
+                    mapaQtdFig.add(mapa);
+                }
+            }
+            Usuario usuario = new Usuario(1, nome, mapaQtdFig);
+            ListaDeUsuario.getUsuarios().add(usuario);
+            response.sendRedirect("usuario-listar.html");
+        } else {
+
+        }
     }
 
     private void criarFormUsuario(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     private void listarUsuario(HttpServletResponse response, HttpServletRequest request) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     private void editarUsuario(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
     private void excluiUsuario(HttpServletRequest request, HttpServletResponse response) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
     }
 
 }
