@@ -1,14 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package Modelos;
 
-/**
- *
- * @author ice
- */
 public class Figurinha {
+    int numero;
+    String descricao;
+
+    public Figurinha(int numero, String descricao) {
+        this.numero = numero;
+        this.descricao = descricao;
+    }
+    
     
 }
