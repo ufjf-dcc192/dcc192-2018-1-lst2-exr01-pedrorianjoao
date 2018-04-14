@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="Modelos.Usuario"%>
 <%@page import="Modelos.Figurinha"%>
 <%@page import="Modelos.ListaDeFigurinhas"%>
@@ -13,12 +14,14 @@
         <h1>Lista de Usuários </h1>
         <table border = '1'>
             <tbody>
-                <%for (int i=0; i<ListaDeUsuario.getUsuarios().size();i++) {
-                Usuario usuario = ListaDeUsuario.getUsuarios().get(i);
+                <%
+                List<Usuario> usuarios = (List<Usuario>)request.getAttribute("usuarios");
+                    for (int i = 0; i < usuarios.size(); i++) {
+                        Usuario usuario = usuarios.get(i);
                 %>
                 <tr>
                     <td><a href="usuario-editar.html?linha=<%=i%>">Editar</a></td>
-                    <td><a href="usario-excluir.html?linha=<%=i%>">Excluir</a></td>
+                    <td><a href="usuario-excluir.html?linha=<%=i%>">Excluir</a></td>
                     <td><%=usuario.getIdUsuario()%></td>
                     <td><%=usuario.getNomeUsuario()%></td>
                 </tr>

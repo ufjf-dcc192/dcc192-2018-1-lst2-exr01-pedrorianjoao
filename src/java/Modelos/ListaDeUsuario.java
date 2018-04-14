@@ -12,23 +12,22 @@ public class ListaDeUsuario {
 
     public static List<Usuario> getUsuarios() {
         if (usuarios == null) {
-            ArrayList<ArrayList<Map<Integer, Figurinha>>> mapasTotais = new ArrayList<>();
+            usuarios = new ArrayList<>();
+            ArrayList<ArrayList<FigurasDoAlbum>> albuns = new ArrayList();
             for (int i = 0; i < 4; i++) {
-                 mapasTotais.add(new ArrayList<>());
+                albuns.add(new ArrayList());
             }
-            for (ArrayList<Map<Integer, Figurinha>> mapasT : mapasTotais) {
+            for (ArrayList<FigurasDoAlbum> album : albuns) {
                 Random random = new Random();
                 for (int i = 0; i < ListaDeFigurinhas.getFigurinhas().size(); i++) {
-                    Map<Integer, Figurinha> mapa = new HashMap<>();
-                    mapa.put(random.nextInt(10), ListaDeFigurinhas.getFigurinhas().get(i));
-                    mapasT.add(mapa);
+                    FigurasDoAlbum figuras = new FigurasDoAlbum(ListaDeFigurinhas.getFigurinhas().get(i), random.nextInt(10));
+                    album.add(figuras);
                 }
             }
-
-            usuarios.add(new Usuario(0, "José", mapasTotais.get(0)));
-            usuarios.add(new Usuario(1, "Maria", mapasTotais.get(1)));
-            usuarios.add(new Usuario(2, "Rian", mapasTotais.get(2)));
-            usuarios.add(new Usuario(3, "Pedro", mapasTotais.get(3)));
+            usuarios.add(new Usuario("José", albuns.get(0)));
+            usuarios.add(new Usuario("Maria", albuns.get(1)));
+            usuarios.add(new Usuario("Rian", albuns.get(2)));
+            usuarios.add(new Usuario("Pedro", albuns.get(3)));
         }
 
         return usuarios;
