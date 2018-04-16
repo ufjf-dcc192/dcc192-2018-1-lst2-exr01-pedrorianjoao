@@ -6,11 +6,8 @@ import Modelos.ListaDeFigurinhas;
 import Modelos.ListaDeUsuario;
 import Modelos.Usuario;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -18,7 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "UsuarioServlet", urlPatterns = {"/usuario-listar.html", "/usuario-inserir.html", "/usuario-editar.html", "/usuario-excluir.html"})
+@WebServlet(name = "UsuarioServlet", urlPatterns = {"/usuario-listar.html", "/usuario-inserir.html", "/usuario-editar.html", "/usuario-excluir.html", "/usuario-possuidores.html", "/usuario-busca-figurinha.html"})
 public class UsuarioServlet extends HttpServlet {
 
     @Override
@@ -41,11 +38,16 @@ public class UsuarioServlet extends HttpServlet {
                 case "/usuario-visualizar.html":
                     excluiUsuario(request, response);
                     break;
-                default:
+                case "/usuario-possuidores.html":
+                    criarbuscarUsuarios(request, response);
                     break;
+                case "/usuario-busca-figurinha.html":
+                    buscaUsuariosFigurinha(request, response);
+                    break;
+                default:
+                    response.sendError(404);
             }
         }
-        response.sendError(404);
 
     }
 
@@ -121,6 +123,29 @@ public class UsuarioServlet extends HttpServlet {
         List<Usuario> usuarios = ListaDeUsuario.getUsuarios();
         usuarios.remove(codigo);
         response.sendRedirect("usuario-listar.html");
+    }
+
+    private void criarbuscarUsuarios(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher despachante = request.getRequestDispatcher("/WEB-INF/usuario-possuidores.jsp");
+        despachante.forward(request, response);
+    }
+
+    private void buscaUsuariosFigurinha(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
+        response.setContentType("text/html;charset=UTF-8");
+        int codigo = Integer.parseInt(request.getParameter("figurinhas"));
+        String categoria = request.getParameter("categoria");
+        Figurinha figura = ListaDeFigurinhas.getFigurinhas().get(codigo);
+        List<Usuario> usuarios;
+        if ("interessado".equals(categoria)) {
+            usuarios = ListaDeUsuario.getInteressados(figura);
+        } else {
+            usuarios = ListaDeUsuario.getDonos(figura);
+        }
+        request.setAttribute("usuarios", usuarios);
+        request.setAttribute("figura", figura);
+        request.setAttribute("categoria", categoria);
+        RequestDispatcher despachante = request.getRequestDispatcher("/WEB-INF/usuario-possuidores.jsp");
+        despachante.forward(request, response);
     }
 
 }

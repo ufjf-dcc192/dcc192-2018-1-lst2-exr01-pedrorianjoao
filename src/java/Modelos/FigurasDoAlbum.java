@@ -26,4 +26,11 @@ public class FigurasDoAlbum {
     public void setQuantidade(Integer quantidade) {
         this.quantidade = quantidade;
     }
+    
+    public Integer consultarQuantidade(Figurinha figura){
+        if(figura.equals(this.figura)){
+            return this.quantidade;
+        }
+        return -1;
+    }
 }

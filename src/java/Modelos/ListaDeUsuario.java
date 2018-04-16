@@ -20,7 +20,7 @@ public class ListaDeUsuario {
             for (ArrayList<FigurasDoAlbum> album : albuns) {
                 Random random = new Random();
                 for (int i = 0; i < ListaDeFigurinhas.getFigurinhas().size(); i++) {
-                    FigurasDoAlbum figuras = new FigurasDoAlbum(ListaDeFigurinhas.getFigurinhas().get(i), random.nextInt(10));
+                    FigurasDoAlbum figuras = new FigurasDoAlbum(ListaDeFigurinhas.getFigurinhas().get(i),random.nextInt(10));
                     album.add(figuras);
                 }
             }
@@ -32,4 +32,43 @@ public class ListaDeUsuario {
 
         return usuarios;
     }
+
+    public static List<Usuario> getDonos(Figurinha figura) {
+        List<Usuario> donos = new ArrayList<>();
+        for (Usuario usuario : ListaDeUsuario.getUsuarios()) {
+            ArrayList<FigurasDoAlbum> figurasAlbum = usuario.getMapaQtdFig();
+            for (FigurasDoAlbum figuraAlbum : figurasAlbum) {
+                if(figuraAlbum.getFigura().equals(figura) && figuraAlbum.getQuantidade()>1){
+                    donos.add(usuario);
+                    break;
+                }
+            }
+        }
+        return donos;
+    }
+     public static List<Usuario> getInteressados(Figurinha figura) {
+        List<Usuario> interessados = new ArrayList<>();
+        for (Usuario usuario : ListaDeUsuario.getUsuarios()) {
+            ArrayList<FigurasDoAlbum> figurasAlbum = usuario.getMapaQtdFig();
+            for (FigurasDoAlbum figuraAlbum : figurasAlbum) {
+                if(figuraAlbum.getFigura().equals(figura) && figuraAlbum.getQuantidade()<=0){
+                    interessados.add(usuario);
+                    break;
+                }
+            }
+        }
+        return interessados;
+    }
+    public static Integer getQuantidadePorUsuario(Usuario usuario,Figurinha figura) {
+        Integer quantidade = 0;
+            ArrayList<FigurasDoAlbum> figurasAlbum = usuario.getMapaQtdFig();
+            for (FigurasDoAlbum figuraAlbum : figurasAlbum) {
+                if(figuraAlbum.getFigura().equals(figura)){
+                    quantidade = figuraAlbum.getQuantidade();
+                    break;
+                }
+            }
+        return quantidade;
+    } 
+     
 }
